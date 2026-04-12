@@ -39,7 +39,7 @@ pipeline {
 		always {
 			echo ("i run always")
 		}
-		sucess {
+		success {
 			echo("I run on success")
 		}
 		failure {
