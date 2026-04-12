@@ -1,11 +1,30 @@
-# Build a JAR File
-FROM maven:3.8.2-jdk-8-slim AS stage1
-WORKDIR /home/app
-COPY . /home/app/
-RUN mvn -f /home/app/pom.xml clean package
+# -------------------------------
+# Stage 1: Build
+# -------------------------------
+FROM maven:3.9.14-eclipse-temurin-8 AS stage1
 
-# Create an Image
+WORKDIR /home/app
+
+# Copy only pom first (cache dependencies)
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+# Copy source code
+COPY src ./src
+
+# Build jar
+RUN mvn clean package -DskipTests
+
+# -------------------------------
+# Stage 2: Runtime
+# -------------------------------
 FROM eclipse-temurin:8-jdk-alpine
+
+WORKDIR /app
+
+# Copy built jar
+COPY --from=stage1 /home/app/target/*.jar app.jar
+
 EXPOSE 5000
-COPY --from=stage1 /home/app/target/hello-world-java.jar hello-world-java.jar
-ENTRYPOINT ["sh", "-c", "java -jar /hello-world-java.jar"]
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
