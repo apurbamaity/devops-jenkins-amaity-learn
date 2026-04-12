@@ -1,4 +1,4 @@
-package com.in28minutes.microservices.currencyexchangeservice;
+package com.in28minutes.rest.webservices.restfulwebservices;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CurrencyExchangeServiceApplicationTests {
+public class RestfulWebServicesApplicationTests {
 
 	@Test
 	public void contextLoads() {
