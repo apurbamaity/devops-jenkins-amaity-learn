@@ -48,6 +48,34 @@ pipeline {
 				sh 'mvn failsafe:integration-test failsafe:verify'
 			}
 		}
+
+		// stage("Package"){
+		// 	steps {
+		// 		sh 'mvn package -DskipTests'
+		// 	}
+		// }
+
+		stage("Docker Build"){
+			steps {
+				// "docker build -t maityda/hello-world-python:$env.BUILD_TAG"
+				script {
+					dockerImage = docker.build("maityda/hello-world-java:${env.BUILD_TAG}")
+				}
+			}
+		}
+
+		stage("Push Docker Image"){
+			steps {
+				script {
+					docker.withRegistry('', dockerHub) {
+						dockerImage.push();
+						dockerImage.push('latest');
+					}
+				}
+			}
+		}
+
+		
 	}
 
 	post {
