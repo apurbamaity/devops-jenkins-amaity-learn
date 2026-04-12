@@ -49,11 +49,11 @@ pipeline {
 			}
 		}
 
-		// stage("Package"){
-		// 	steps {
-		// 		sh 'mvn package -DskipTests'
-		// 	}
-		// }
+		stage("Package"){
+			steps {
+				sh 'mvn package -DskipTests'
+			}
+		}
 
 		stage("Docker Build"){
 			steps {
