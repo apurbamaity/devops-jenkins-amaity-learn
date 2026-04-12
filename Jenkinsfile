@@ -15,7 +15,7 @@
 // declarative
 
 pipeline {
-	// agent any
+	agent any
 	// agent {
 	// 	docker {image 'maven:3.9.14'}
 	// }
