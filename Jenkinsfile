@@ -34,5 +34,17 @@ pipeline {
 			}
 		}
 	}
+
+	post {
+		always {
+			echo ("i run always")
+		}
+		sucess {
+			echo("I run on success")
+		}
+		failure {
+			echo("I run on failure")
+		}
+	}
 }
 
