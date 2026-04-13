@@ -15,8 +15,12 @@ pipeline {
             steps {
 				echo "Manual checkout"
                 dir('project/backend') {
-                    sh 'pip install -r req.txt'
-                    sh 'python -m py_compile app.py'
+					sh '''
+					python -m venv venv
+        			. venv/bin/activate
+                    pip install -r req.txt
+                    python -m py_compile app.py
+					'''
                 }
 				echo "build backend success"
             }
