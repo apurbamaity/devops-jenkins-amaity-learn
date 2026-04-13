@@ -25,6 +25,18 @@ pipeline {
 				echo "build backend success"
             }
         }
+
+		stage('Build Frontend') {
+            agent {
+                docker { image 'node:20' }
+            }
+            steps {
+                dir('project/frontend') {
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
     }
 
     post {
