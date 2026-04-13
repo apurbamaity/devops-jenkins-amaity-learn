@@ -58,7 +58,7 @@ pipeline {
                 sh "docker rm -f frontend || true"
 
                 sh "docker run -d --name backend -p 5000:5000 maityda/backend:${IMAGE_TAG}"
-                sh "docker run -d --name frontend -p 5173:4173 maityda/frontend:${IMAGE_TAG}"
+                sh "docker run -d --name frontend -p 5173:5173 maityda/frontend:${IMAGE_TAG}"
             }
         }
 
